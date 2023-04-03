@@ -1,0 +1,19 @@
+.wrapper {
+    padding: 10px 20px;
+    text-align: center;
+    background: rgb(255, 105, 0);
+    border-radius: 20px;
+    border: none;
+    color: white;
+    font-size: 16px;
+}
+
+.secondary {
+    background: rgb(255, 240, 230);
+    color: rgb(209, 87, 0);   
+}
+.disabled {
+    cursor: not-allowed;
+    background: rgb(226, 226, 233);
+    color: rgb(171, 173, 186);
+}
