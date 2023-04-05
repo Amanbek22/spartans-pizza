@@ -9,6 +9,7 @@ import AboutUsPage from './pages/AboutUsPage/AboutUsPage';
 import AdminPage from './pages/AdminPage/AdminPage';
 import CreatePizzaPage from './pages/CreatePizzaPage/CreatePizzaPage';
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
+import LoginPage from './pages/LoginPage/LoginPage';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/aboutus" element={<AboutUsPage />} />
           <Route path="/admin" element={<AdminPage />} />
           <Route path="/create-pizza" element={<CreatePizzaPage />} />
+          <Route path="/login" element={<LoginPage />} />
           <Route path="*" element={<NotFoundPage />} />
       </Routes>
 
