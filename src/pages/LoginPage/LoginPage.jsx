@@ -1,19 +1,16 @@
 import React from "react";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import Button from "../../components/button/Button";
 
-function LoginPage() {
+function LoginPage( { setAuth } ) {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
-
-  const navigate = useNavigate()
 
   const submit = (e) => {
     e.preventDefault();
 
     if(login === 'admin' && password === 'admin') {
-        navigate('/admin')
+        setAuth(true)
     } else {
         alert("Login или Password были введены не коректно!")
     }

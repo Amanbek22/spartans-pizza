@@ -2,8 +2,12 @@ import css from "./Header.module.css";
 import logo from "../../assets/logo.png";
 import Button from "../button/Button";
 import { Link } from "react-router-dom";
+import {useState} from "react";
+import Modal from "../modal/Modal";
 
 function Header() {
+    const [isModal, setModal] = useState(false);
+
   return (
     <div className={css.wrapper + " container"}>
       <header>
@@ -15,9 +19,11 @@ function Header() {
         <Link to="/">Пиццы</Link>
         <Link to="/contacts">Контакты</Link>
         <Link to="aboutus">О нас</Link>
-        <Button title={"Корзина"} />
-        {/* <Button title={"Корзина 2"} variant="secondary"/>
-            <Button title={"Корзина 2"} variant="disabled"/> */}
+        <Button onClick={() => setModal(!isModal)} title={"Корзина"} />
+          {
+              isModal ? <Modal setModal={setModal} /> : null
+          }
+
       </nav>
     </div>
   );

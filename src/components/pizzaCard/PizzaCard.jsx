@@ -1,4 +1,4 @@
-import { base_url } from "../../constants/api_const";
+import { deletePizza } from "../../api/Api";
 import Button from "../button/Button";
 import css from "./PizzaCard.module.css";
 
@@ -6,11 +6,17 @@ function PizzaCard({ id, name, image, description, price, isAdmin }) {
   const handleDelete = () => {
     const res = window.confirm("Вы действительно хотите удалить " + name + "?");
     if (res) {
-      fetch(base_url + "pizza/" + id, {
-        method: "DELETE",
-      }).then(() => {
-        window.location.reload()
-      })
+      // axios.delete(base_url + "pizza/" + id)
+      deletePizza(id)
+      .then(() => {
+        window.location.reload();
+      });
+
+      // fetch(base_url + "pizza/" + id, {
+      //   method: "DELETE",
+      // }).then(() => {
+      //   window.location.reload();
+      // });
     }
   };
 

@@ -2,9 +2,9 @@ import { useState } from "react";
 import { useEffect } from "react";
 import PizzaCard from "../../components/pizzaCard/PizzaCard";
 import Slider from "../../components/slider/Slider";
-import { base_url } from "../../constants/api_const";
 import css from "./Homepage.module.css";
 import LoadingBar from 'react-top-loading-bar'
+import { getPizzas } from "../../api/Api";
 
 function HomePage() {
   const [pizzas, setPizzas] = useState([])
@@ -15,9 +15,9 @@ function HomePage() {
     setTimeout(() => {
       setProgress(60)
     }, 350)
-    fetch(base_url + 'pizza')
-      .then((res) => res.json())
-      .then((data) => setPizzas(data))
+
+    getPizzas()
+      .then((res) => setPizzas(res.data))
       .finally(() => {
         setProgress(100)
       })
