@@ -2,7 +2,10 @@ import css from "./../Modal.module.css";
 
 function ModalCard() {
   return (
-    <div>ModalCard</div>
+    <div className={css.card}>
+      <div>Name</div>
+      <div>Price</div>
+    </div>
   )
 }
 

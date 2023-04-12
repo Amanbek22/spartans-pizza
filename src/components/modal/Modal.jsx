@@ -13,7 +13,7 @@ function Modal({ setModal }) {
         {basket.length ? (
           <>
             <ModalHeader />
-            <div>
+            <div className={css.cardsWrapper}>
               <ModalCard />
               <ModalCard />
               <ModalCard />

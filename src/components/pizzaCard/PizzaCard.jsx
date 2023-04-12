@@ -1,8 +1,12 @@
+import { useDispatch } from "react-redux";
 import { deletePizza } from "../../api/Api";
+import { addToBasket } from "../../redux";
 import Button from "../button/Button";
 import css from "./PizzaCard.module.css";
 
 function PizzaCard({ id, name, image, description, price, isAdmin }) {
+  const dispatch = useDispatch();
+
   const handleDelete = () => {
     const res = window.confirm("Вы действительно хотите удалить " + name + "?");
     if (res) {
@@ -20,6 +24,10 @@ function PizzaCard({ id, name, image, description, price, isAdmin }) {
     }
   };
 
+  const handleAddToBasket = () => {
+    dispatch( addToBasket({ id, name, image, description, price, }) )
+  }
+
   return (
     <div className={css.wrapper}>
       <div className={css.imageWrapper}>
@@ -32,7 +40,7 @@ function PizzaCard({ id, name, image, description, price, isAdmin }) {
         {isAdmin ? (
           <Button title={"Удалить"} onClick={handleDelete} />
         ) : (
-          <Button title={"В корзину"} />
+          <Button title={"В корзину"} onClick={handleAddToBasket} />
         )}
       </div>
     </div>
