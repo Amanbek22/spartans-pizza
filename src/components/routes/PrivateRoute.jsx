@@ -1,8 +1,10 @@
 import React from "react";
 import { useEffect } from "react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-function PrivateRoute({ Component, auth }) {
+function PrivateRoute({ Component }) {
+  const auth = useSelector((state) => state.auth.isAuth )
   const navigate = useNavigate();
 
   useEffect(() => {

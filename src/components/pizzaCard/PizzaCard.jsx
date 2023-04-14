@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import { deletePizza } from "../../api/Api";
-import { addToBasket } from "../../redux";
+import { addToBasket } from "../../redux/slices/basketSlice";
 import Button from "../button/Button";
 import css from "./PizzaCard.module.css";
 

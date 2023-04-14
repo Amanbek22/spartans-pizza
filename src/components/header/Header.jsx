@@ -5,11 +5,12 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import Modal from "../modal/Modal";
 import { useDispatch, useSelector } from "react-redux";
-import { incremented } from "../../redux";
+import { incremented } from "../../redux/slices/counterSlice";
 
 function Header() {
   const [isModal, setModal] = useState(false);
   const number = useSelector((state) => state.counter.value);
+  const basketLen = useSelector((state) => state.basket.data.length)
   const dispatch = useDispatch()
 
   const handlePlus = () => {
@@ -24,13 +25,13 @@ function Header() {
         </Link>
           {number}
           <button onClick={handlePlus}>Plus</button>
-          <button >Minus</button>
+          <button>Minus</button>
       </header>
       <nav>
         <Link to="/">Пиццы</Link>
         <Link to="/contacts">Контакты</Link>
         <Link to="aboutus">О нас</Link>
-        <Button onClick={() => setModal(!isModal)} title={"Корзина"} />
+        <Button onClick={() => setModal(!isModal)} title={"Корзина | " + basketLen} />
         {isModal ? <Modal setModal={setModal} /> : null}
       </nav>
     </div>

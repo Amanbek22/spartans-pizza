@@ -1,22 +1,23 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import ModalCard from "./components/ModalCard";
 import ModalHeader from "./components/ModalHeader";
 import ModalResult from "./components/ModalResult";
 import css from "./Modal.module.css";
 
-const basket = [1, 2, 3];
 
 function Modal({ setModal }) {
+  const basket = useSelector((state) => state.basket.data)
   return (
     <div onClick={() => setModal(false)} className={css.wrapper}>
       <div onClick={(e) => e.stopPropagation()} className={css.modal}>
         {basket.length ? (
           <>
-            <ModalHeader />
+            <ModalHeader count={basket.length} />
             <div className={css.cardsWrapper}>
-              <ModalCard />
-              <ModalCard />
-              <ModalCard />
+              {
+                basket?.map((item) => <ModalCard key={item.id} {...item} />)
+              }
             </div>
             <ModalResult />
           </>

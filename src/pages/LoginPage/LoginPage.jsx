@@ -1,18 +1,23 @@
 import React from "react";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import Button from "../../components/button/Button";
+import { loginAction } from "../../redux/slices/authSlice";
 
-function LoginPage( { setAuth } ) {
+function LoginPage() {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
+
+  const dispatch = useDispatch();
 
   const submit = (e) => {
     e.preventDefault();
 
-    if(login === 'admin' && password === 'admin') {
-        setAuth(true)
+    if (login === "admin" && password === "admin") {
+      // setAuth(true)
+      dispatch( loginAction(true) );
     } else {
-        alert("Login или Password были введены не коректно!")
+      alert("Login или Password были введены не коректно!");
     }
   };
 
