@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Button from "../../components/button/Button";
-import { fetchCreatePizza } from "../../redux/slices/pizzaSlice";
+import { fetchCreatePizza, setPending } from "../../redux/slices/pizzaSlice";
 import css from "./CreatePizza.module.css";
 
 function CreatePizzaPage() {
@@ -19,6 +19,7 @@ function CreatePizzaPage() {
   useEffect(() => {
     if (isCreating === "success") {
       navigate("/admin");
+      dispatch(setPending('idle')) 
     }
   }, [isCreating]);
 
