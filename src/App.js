@@ -12,8 +12,17 @@ import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import PrivateRoute from "./components/routes/PrivateRoute";
 import PublicRoute from "./components/routes/PublicRoute";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { fetchPizzas } from "./redux/slices/pizzaSlice";
 
 function App() {
+  
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch( fetchPizzas() )
+  }, [])
+
   return (
     <div className="App">
       <Header />
@@ -28,9 +37,7 @@ function App() {
         />
         <Route
           path="/login"
-          element={
-            <PublicRoute Component={() => <LoginPage />} />
-          }
+          element={<PublicRoute Component={() => <LoginPage />} />}
         />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>

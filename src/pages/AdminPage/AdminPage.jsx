@@ -1,43 +1,19 @@
-import { useState } from "react";
-import { useEffect } from "react";
 import PizzaCard from "../../components/pizzaCard/PizzaCard";
 import LoadingBar from "react-top-loading-bar";
 import Button from "../../components/button/Button";
 import { Link } from "react-router-dom";
-import { getPizzas } from "../../api/Api";
+import { useSelector } from "react-redux";
 
 function AdminPage() {
-  const [pizzas, setPizzas] = useState([]);
-  const [progress, setProgress] = useState(0);
+  const { progress, pizzaData: pizzas, error } = useSelector((state) => state.pizza)
 
-  useEffect(() => {
-    setProgress(30);
-    setTimeout(() => {
-      setProgress(60);
-    }, 350);
-
-    
-    // axios.get(base_url + "pizza")
-    getPizzas()
-      .then((res) => setPizzas(res.data))
-      .finally(() => {
-        setProgress(100);
-      });
-
-    // fetch(base_url + "pizza")
-    //   .then((res) => res.json())
-    //   .then((data) => setPizzas(data))
-    //   .finally(() => {
-    //     setProgress(100);
-    //   });
-  }, []);
-
+  if(error) return <h1>Что то пошло не так!</h1>
   return (
     <div>
       <LoadingBar
         color="#f11946"
         progress={progress}
-        onLoaderFinished={() => setProgress(0)}
+        onLoaderFinished={() => {}}
       />
       <section className="container">
         <Link to="/create-pizza">

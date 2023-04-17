@@ -1,7 +1,9 @@
+import { useEffect } from "react";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { createPizza } from "../../api/Api";
 import Button from "../../components/button/Button";
+import { fetchCreatePizza } from "../../redux/slices/pizzaSlice";
 import css from "./CreatePizza.module.css";
 
 function CreatePizzaPage() {
@@ -9,28 +11,26 @@ function CreatePizzaPage() {
   const [price, setPrice] = useState("");
   const [image, setImage] = useState("");
   const [desc, setDesc] = useState("");
-  const [isSending, setSending] = useState(false);
+  const isCreating = useSelector((state) => state.pizza.isCreating);
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (isCreating === "success") {
+      navigate("/admin");
+    }
+  }, [isCreating]);
 
   const submit = (e) => {
     e.preventDefault();
-    setSending(true);
     const data = {
       name,
       price,
       image,
       description: desc,
     };
-    createPizza(data)
-      .finally(() => {
-        setSending(false);
-      })
-      .then((res) => {
-        if (res.status === 201) {
-          navigate("/admin");
-        }
-      });
+    dispatch(fetchCreatePizza(data));
   };
 
   return (
@@ -82,9 +82,9 @@ function CreatePizzaPage() {
           />
         </label>
         <Button
-          variant={isSending ? "disabled" : ""}
-          disabled={isSending}
-          title={isSending ? "Создание..." : "Создать"}
+          variant={isCreating === "pending" ? "disabled" : ""}
+          disabled={isCreating === "pending"}
+          title={isCreating === "pending" ? "Создание..." : "Создать"}
           type="submit"
         />
       </form>

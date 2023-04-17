@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
-import { deletePizza } from "../../api/Api";
 import { addToBasket } from "../../redux/slices/basketSlice";
+import { fetchDeletePizza } from "../../redux/slices/pizzaSlice";
 import Button from "../button/Button";
 import css from "./PizzaCard.module.css";
 
@@ -10,17 +10,7 @@ function PizzaCard({ id, name, image, description, price, isAdmin }) {
   const handleDelete = () => {
     const res = window.confirm("Вы действительно хотите удалить " + name + "?");
     if (res) {
-      // axios.delete(base_url + "pizza/" + id)
-      deletePizza(id)
-      .then(() => {
-        window.location.reload();
-      });
-
-      // fetch(base_url + "pizza/" + id, {
-      //   method: "DELETE",
-      // }).then(() => {
-      //   window.location.reload();
-      // });
+      dispatch( fetchDeletePizza(id) )
     }
   };
 
